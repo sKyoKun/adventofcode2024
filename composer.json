@@ -9,12 +9,24 @@
         "ext-iconv": "*",
         "symfony/console": "7.1.*",
         "symfony/dotenv": "7.1.*",
+        "symfony/expression-language": "7.1.*",
+        "symfony/filesystem": "7.1.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "7.1.*",
         "symfony/runtime": "7.1.*",
-        "symfony/yaml": "7.1.*"
+        "symfony/yaml": "7.1.*",
+        "ext-bcmath": "*"
     },
     "require-dev": {
+        "friends-of-behat/symfony-extension": "^2.3",
+        "friendsofphp/php-cs-fixer": "^3.15",
+        "phpunit/phpunit": "^10.2",
+        "symfony/browser-kit": "7.1.*",
+        "symfony/css-selector": "7.1.*",
+        "symfony/debug-bundle": "7.1.*",
+        "symfony/monolog-bundle": "^3.0",
+        "symfony/phpunit-bridge": "^5.2",
+        "symfony/web-profiler-bundle": "7.1.*"
     },
     "config": {
         "allow-plugins": {
