@@ -28,15 +28,19 @@ class Day1Controller extends AbstractController
     public function part1(string $file): JsonResponse
     {
         $lines = $this->inputReader->getInput($file . '.txt');
+        $lists = $this->day1services->getLists($lines);
+        $distances = $this->day1services->getDifference($lists);
 
-        return new JsonResponse('', Response::HTTP_OK);
+        return new JsonResponse(array_sum($distances), Response::HTTP_OK);
     }
 
     #[Route('/2/{file}', name: 'day1_2', defaults: ['file' => 'day1'])]
     public function part2(string $file): JsonResponse
     {
         $lines = $this->inputReader->getInput($file . '.txt');
+        $lists = $this->day1services->getLists($lines);
+        $similarityScore = $this->day1services->getSimilarityScore($lists);
 
-        return new JsonResponse('', Response::HTTP_OK);
+        return new JsonResponse($similarityScore, Response::HTTP_OK);
     }
 }
