@@ -12,10 +12,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class DisplayLeaderboardsController extends AbstractController
 {
-    //private const LEADERBOARDS = [1112427, 4234761];
-    private const LEADERBOARDS = [1112427];
-    private const AOC_API_URL = 'https://adventofcode.com/2024/leaderboard/private/view/__LEADERBOARDID__.json';
-
     public function __construct(private LeaderboardServices $leaderboardServices)
     {
     }
@@ -26,12 +22,19 @@ class DisplayLeaderboardsController extends AbstractController
         defaults: ["year"=>"2024"],
         methods: ['GET']
     )]
-    public function displayLeaderboard(Request $request, int $year): Response
+    public function displayLeaderboard(int $year): Response
     {
         $leaderboards = $this->leaderboardServices->retrieveLeaderboards($year);
         $leaderboardsData = [];
+        $leaderboardsData['WA'] = [];
         foreach ($leaderboards as $leaderboardName => $leaderboard) {
-            $leaderboardsData[$leaderboardName] = $this->leaderboardServices->parseJsonLeaderboard($leaderboard);
+            // merge the 2 WA leaderboards
+            if (str_contains($leaderboardName, 'WA')) {
+                $leaderboardsData['WA'] = array_merge($leaderboardsData['WA'], $this->leaderboardServices->parseJsonLeaderboard($leaderboard));
+                $this->leaderboardServices->orderLeaderboard($leaderboardsData['WA']);
+            } else {
+                $leaderboardsData[$leaderboardName] = $this->leaderboardServices->parseJsonLeaderboard($leaderboard);
+            }
         }
 
         return $this->render('leaderboard.twig', [

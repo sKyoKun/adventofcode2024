@@ -1,0 +1,30 @@
+body {
+    background: #0f0f23;
+    color: #FFFFFF;
+}
+h1 {
+    color: #ffff66;
+}
+h2 {
+    color: #99ff99;
+    border-bottom:1px solid #99ff99;
+    width:50%;
+    margin-bottom: 1em;
+}
+
+.day {
+    transform: rotate(-45deg);
+    padding-bottom: 1em;
+}
+
+.fullstar {
+    color: #ffff66;
+}
+
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+    padding-right: 1em;
+}
