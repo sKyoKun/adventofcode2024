@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AoC {{ year }} Leaderboards</title>
+</head>
+<body>
+<h1>AoC {{ year }} Leaderboards</h1>
+
+{% for leaderboardName, leaderboard in leaderboardData %}
+    <div class="leaderboard">
+        <h2>{{ leaderboardName }}</h2>
+        <table>
+            <thead><th>Nom</th>{% for i in 1..25 %}<th>Jour {{ i }}</th>{% endfor %}<th>Total</th></thead>
+            <tbody>
+            {% for memberName, memberData in leaderboard %}
+                <tr>
+                    <td>{{ memberName }}</td>
+                    {% for level in 1..25 %}
+                        {% if memberData.completion_day_level.(level) is defined %}
+                            {% if memberData.completion_day_level[level].2 is defined %}
+                                <td>★</td>
+                            {% else %}
+                                <td>☆</td>
+                            {% endif %}
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                    {% endfor %}
+                    <td>{{ memberData.stars }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endfor %}
+</body>
+</html>
