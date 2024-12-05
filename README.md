@@ -16,7 +16,10 @@ Run the tests :
 ```vendor/bin/phpunit``` (unit)
 ```vendor/bin/behat``` (functional)
 
-For the leaderboard : 
-Route is /leaderboards/{year} 
-Create a cookie.txt file at the root of the project and paste the session cookie into it. To do so, go to an AOC input and use the network tab of the developper tool to retrieve the session cookie.
-Paste it in the cookie.txt file (/!\ remove the blank line if it exists)
+For the leaderboard, route is /leaderboards/{year} :
+
+Configure the API calls :
+- Create a cookie.txt file at the root of the project and paste the session cookie into it. To do so, go to an AOC input and use the network tab of the developper tool to retrieve the session cookie.
+- Paste it in the cookie.txt file (/!\ remove the blank line if it exists)
+- Update the default year on the controller if needed
+- Change the leaderboard list in _LeaderboardService_
