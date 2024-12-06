@@ -29,13 +29,6 @@ class Day6Controller extends AbstractController
         $this->day6services->walk($grid, $startX, $startY, $visited);
         $countVisited = $this->day6services->countVisitedPoints($visited);
 
-        /*$printGrid = '';
-        foreach ($visited as $index => $entry) {
-            $printGrid .= implode('', $entry)."\n";
-        }
-        var_dump($printGrid);*/
-
-
         return new JsonResponse($countVisited, Response::HTTP_OK);
     }
 
