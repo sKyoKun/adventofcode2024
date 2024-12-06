@@ -71,4 +71,28 @@ class CalendarServices
 
         return $reversedGrid;
     }
+
+    public function rotateGridClockwise(array $grid): array
+    {
+        $grid = array_values( $grid );
+        $result = array();
+
+        // make each new row = reversed old column
+        foreach( array_keys( $grid[0] ) as $column ){
+            $result[] = array_reverse( array_column( $grid, $column ) );
+        }
+
+        return $result;
+    }
+
+    public function rotateGridAntiClockwise(array $grid): array
+    {
+        foreach ($grid as $row) {
+            foreach (array_reverse($row) as $i => $v) {
+                $result[$i][] = $v;
+            }
+        }
+
+        return $result;
+    }
 }
