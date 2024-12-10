@@ -29,4 +29,4 @@
 ###< symfony/phpunit-bridge ###
 
 cookie.txt
-/public/Files/day[0-9].txt
+/public/Files/day[0-9]*.txt

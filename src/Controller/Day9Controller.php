@@ -30,7 +30,8 @@ class Day9Controller extends AbstractController
     public function part2(string $file): JsonResponse
     {
         $lines = $this->inputReader->getInput($file.'.txt');
+        $checksum = $this->day9services->getChecksum($lines[0], true);
 
-        return new JsonResponse('', Response::HTTP_NOT_ACCEPTABLE);
+        return new JsonResponse($checksum, Response::HTTP_OK);
     }
 }
