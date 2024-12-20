@@ -16,7 +16,7 @@ class Day19Services
         }
 
         foreach ($this->numberOfValidPatterns as $nbValidPattern) {
-            if(0 < $nbValidPattern) {
+            if (0 < $nbValidPattern) {
                 $validDesigns++;
             }
         }
@@ -26,14 +26,15 @@ class Day19Services
 
     public function countTotalPossibleDesigns($towels, $designs)
     {
+        $totalDesigns = 0;
         foreach ($designs as $design) {
-            $this->isValidDesign($towels, $design, $design);
+            $totalDesigns += $this->isValidDesign($towels, $design, $design);
         }
 
-        return array_sum($this->numberOfValidPatterns);
+        return $totalDesigns;
     }
 
-    public function isValidDesign($towels, $originalDesign, $design)
+    public function isValidDesign($towels, $originalDesign, $design): int
     {
         if ($design === $originalDesign) {
             $this->numberOfValidPatterns[$originalDesign] = 0;
@@ -41,24 +42,27 @@ class Day19Services
 
         // it's the end of the design, it's a valid one
         if ('' === $design) {
-            $this->numberOfValidPatterns[$originalDesign]++;
-            $this->cache[$design] = true;
-            return;
+            $this->numberOfValidPatterns[$originalDesign]++; // for part1
+            return 1 ;
         }
 
         if (isset($this->cache[$design])) {
-            if ($this->cache[$design] === true) {
+            if (0 < $this->cache[$design]) { // for part1
                 $this->numberOfValidPatterns[$originalDesign]++;
             }
-            return;
+            return $this->cache[$design];
         }
 
+        $found = 0;
         foreach ($towels as $towel) {
             if (str_starts_with($design, $towel))
             {
                 $newDesign = substr($design, strlen($towel));
-                $this->isValidDesign($towels, $originalDesign, $newDesign);
+                $found += $this->isValidDesign($towels, $originalDesign, $newDesign);
             }
         }
+
+        $this->cache[$design] = $found;
+        return $found ;
     }
 }
